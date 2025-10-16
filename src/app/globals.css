@@ -1,18 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* minimal resets; background is controlled by Tailwind classes */
-html {
-  scroll-behavior: smooth;
+
+/* ---- slow, continuous gradient loop ---- */
+@keyframes colorShift {
+  0% {
+    --c1: #9b6cb7;  /* purple */
+    --c2: #3ed3b4;  /* mint */
+    --c3: #5eead4;  /* aqua */
+  }
+  50% {
+    --c1: #5eead4;
+    --c2: #9b6cb7;
+    --c3: #3ed3b4;
+  }
+  100% {
+    --c1: #9b6cb7;
+    --c2: #3ed3b4;
+    --c3: #5eead4;
+  }
 }
 
-::-webkit-scrollbar {
-  width: 8px;
+html, body { height: 100%; margin: 0; }
+body {
+  /* animated base gradient behind everything */
+  background-image: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
+  background-size: 400% 400%;
+  animation: colorShift 18s ease-in-out infinite;
+  /* your tailwind radial stays on top via bg-hero-radial class in layout */
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(155, 108, 183, 0.5);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(62, 211, 180, 0.7);
+
+/* ---- utilities ---- */
+@layer utilities {
+  .glass {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .soft-glow {
+    box-shadow:
+      0 0 22px rgba(62,211,180,0.20),
+      0 0 42px rgba(155,108,183,0.18);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .soft-glow:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 28px rgba(62,211,180,0.28),
+      0 0 60px rgba(155,108,183,0.24);
+  }
 }

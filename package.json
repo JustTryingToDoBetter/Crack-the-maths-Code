@@ -11,8 +11,17 @@
   "version": "1.0.0",
   "main": "postcss.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "test": "jest --passWithNoTests",
+  "test:ui": "playwright test --headed",
+  "test:ui:headless": "playwright test --headless",
+  "prepare": "husky install",
+  "format": "prettier --write .",
+  "typecheck": "tsc --noEmit"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
