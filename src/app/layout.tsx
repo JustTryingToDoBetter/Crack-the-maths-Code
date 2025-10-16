@@ -2,6 +2,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Script from "next/script";
 
 const pop = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
@@ -49,6 +50,7 @@ export default function RootLayout({
         <main className="min-h-[calc(100vh-140px)] relative">{children}</main>
         <Footer />
       </body>
+      <Script src="/public/payfast-inline.js" strategy="afterInteractive"/>
     </html>
   );
 }
